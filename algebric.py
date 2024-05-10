@@ -76,9 +76,9 @@ def handle_text(message):
                          f"⚡ Вам заблокирован доступ к боту, {message.from_user.first_name}.")
     elif user_input == "🏆 Миша испорченный до невозможности":
         bot.send_message(message.chat.id, f"⚜ Однозначно, {message.from_user.first_name}!")
-    elif user_input == "💀 Насколько ты Паскарь?":
-        chance = random.randrange(1, 100)
-        bot.send_message(message.chat.id, f"⚜ {message.from_user.first_name}, вы Паскарь на {chance}%")
+    elif user_input == "🧮 Сгенерировать число от 1 до 100":
+        random_num = random.randrange(1, 100)
+        bot.send_message(message.chat.id, f"⚜{random_num}⚜")
     elif user_input == "💻 Как пользоваться этим ботом?":
         bot.send_message(message.chat.id,
                          f"⚜ {message.from_user.first_name}, напишите любой многочлен или алгеброическое выражение, к примеру (a-3)*(a+3).")
@@ -130,7 +130,7 @@ def get_keyboard():
     markup = types.ReplyKeyboardMarkup(row_width=2)
     button1 = types.KeyboardButton("🏆 Миша испорченный до невозможности")
     button2 = types.KeyboardButton("💻 Как пользоваться этим ботом?")
-    button3 = types.KeyboardButton("💀 Насколько ты Паскарь?")
+    button3 = types.KeyboardButton("🧮 Сгенерировать число от 1 до 100")
     button4 = types.KeyboardButton("❓ Обновления проекта")
     markup.add(button1, button2, button3, button4)
     return markup
