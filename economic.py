@@ -131,7 +131,7 @@ def handle_start(message):
 @bot.message_handler(commands=['info'])
 def handle_info(message):
     bot.send_message(message.chat.id,
-                     f'*Создатель:* @misakamozin\n*Дата первого создания:* 27 марта 2024\n*Описание проекта: * Проект был создан при поддержке учебного заведения "ЦДНИТТ при КузГТУ «УникУм»". Этот проект может помочь студентам сверить свой ответ по алгебре или физике с ответом бота.\n*Используемые библиотеки: * telebot, random, re, sympy, json, os',
+                     f'*Создатель:* @misakamozin\n*Дата первого создания:* 27 марта 2024\n*Описание проекта: * Проект был создан при поддержке учебного заведения "ЦДНИТТ при КузГТУ «УникУм»". Этот проект может помочь следить за тратами и балансом.\n*Используемые библиотеки: * telebot, random, re, sympy, json, os',
                      parse_mode="Markdown")
 
 
@@ -142,9 +142,9 @@ def handle_text(message):
         bot.send_message(message.chat.id, f"⚡ Вам заблокирован доступ к боту, {message.from_user.first_name}.")
     elif user_input == "🏆 Миша испорченный до невозможности":
         bot.send_message(message.chat.id, f"⚜ Однозначно, {message.from_user.first_name}!")
-    elif user_input == "💀 Насколько ты Паскарь?":
-        chance = random.randrange(1, 100)
-        bot.send_message(message.chat.id, f"⚜ {message.from_user.first_name}, вы Паскарь на {chance}%")
+    elif user_input == "🧮 Сгенерировать число от 1 до 100":
+        random_num = random.randrange(1, 100)
+        bot.send_message(message.chat.id, f"⚜{random_num}⚜")
     elif user_input == "💻 Как пользоваться этим ботом?":
         bot.send_message(message.chat.id,
                          f"⚜ {message.from_user.first_name}, напишите команду /minus, /plus, /balance.")
@@ -161,7 +161,7 @@ def get_keyboard():
     markup = types.ReplyKeyboardMarkup(row_width=2)
     button1 = types.KeyboardButton("🏆 Миша испорченный до невозможности")
     button2 = types.KeyboardButton("💻 Как пользоваться этим ботом?")
-    button3 = types.KeyboardButton("💀 Насколько ты Паскарь?")
+    button3 = types.KeyboardButton("🧮 Сгенерировать число от 1 до 100")
     button4 = types.KeyboardButton("❓ Обновления проекта")
     markup.add(button1, button2, button3, button4)
     return markup
