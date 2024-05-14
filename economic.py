@@ -3,11 +3,11 @@
 
 from telebot import types
 import telebot
-import re
 import json
 import os
+from tkinter import Tk, Label
 
-bot = telebot.TeleBot(TOKEN)
+bot = telebot.TeleBot("TOKEN")
 
 def get_balance(user_id):
     if user_id in balances:
@@ -26,6 +26,7 @@ def add_income(message):
     try:
         bot.send_message(message.chat.id, "💲 *Введите доход:*", parse_mode="Markdown")
         bot.register_next_step_handler(message, process_income_step)
+        income_tk(message)
     except Exception as e:
         bot.send_message(message.chat.id, f"❌ *Error:* {e}", parse_mode="Markdown")
 
@@ -105,26 +106,6 @@ def send_code(message):
         bot.send_message(message.chat.id, "Вы не админ. У вас нет доступа к этой команде")
 
 
-def replace_superscript(text):
-    superscripts = {
-        '0': '⁰',
-        '1': '¹',
-        '2': '²',
-        '3': '³',
-        '4': '⁴',
-        '5': '⁵',
-        '6': '⁶',
-        '7': '⁷',
-        '8': '⁸',
-        '9': '⁹'
-    }
-
-    def replace_match(match):
-        return superscripts.get(match.group(0)[1], match.group(0))
-
-    pattern = re.compile(r"\^(\d)")
-    result = re.sub(pattern, replace_match, text)
-    return result
 
 @bot.message_handler(commands=['start'])
 def handle_start(message):
@@ -164,7 +145,6 @@ def get_keyboard():
     button2 = types.KeyboardButton("❓ Обновления проекта")
     markup.add(button1, button2)
     return markup
-
 
 if __name__ == "__main__":
     bot.polling(none_stop=True)
